@@ -18,8 +18,9 @@ public class Cookbook {
 
     @JsonSerialize(using = ToStringSerializer.class)
     private ObjectId id;
+    private String title;
     private List<String> ingredients;
-    private String preparation;
+    private List<String> preparationSteps;
     private LocalDate createdAt;
     private LocalDate updatedAt;
 

@@ -5,7 +5,6 @@ import com.mongodb.ReadConcern;
 import com.mongodb.ReadPreference;
 import com.mongodb.TransactionOptions;
 import com.mongodb.WriteConcern;
-import com.mongodb.client.ClientSession;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.model.FindOneAndReplaceOptions;
@@ -20,7 +19,7 @@ import static com.mongodb.client.model.Filters.eq;
 import static com.mongodb.client.model.ReturnDocument.AFTER;
 
 @Repository
-public abstract class MongoCookbookRepository implements CookbookRepository {
+public class MongoCookbookRepository implements CookbookRepository {
 
     private static final TransactionOptions txnOptions = TransactionOptions.builder()
             .readPreference(ReadPreference.primary())
@@ -54,17 +53,6 @@ public abstract class MongoCookbookRepository implements CookbookRepository {
         recipe.setId(new ObjectId());
         cookbookCollection.insertOne(recipe);
         return recipe;
-    }
-
-    @Override
-    public List<Cookbook> createAll(List<Cookbook> recipes) {
-        try (ClientSession clientSession = client.startSession()) {
-            return clientSession.withTransaction(() -> {
-                recipes.forEach(p -> p.setId(new ObjectId()));
-                cookbookCollection.insertMany(clientSession, recipes);
-                return recipes;
-            }, txnOptions);
-        }
     }
 
     @Override

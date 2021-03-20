@@ -15,8 +15,6 @@ public interface CookbookRepository {
 
     Cookbook create(Cookbook recipe);
 
-    List<Cookbook> createAll(List<Cookbook> recipes);
-
     Cookbook update(Cookbook recipe);
 
     void delete(ObjectId id);

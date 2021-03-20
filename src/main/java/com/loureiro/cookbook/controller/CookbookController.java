@@ -25,12 +25,6 @@ public class CookbookController {
         return cookbookRepository.create(recipe);
     }
 
-    @PostMapping("cookbooks")
-    @ResponseStatus(HttpStatus.CREATED)
-    public List<Cookbook> createAllRecipes(@RequestBody List<Cookbook> cookbooks) {
-        return cookbookRepository.createAll(cookbooks);
-    }
-
     @GetMapping("cookbook")
     public List<Cookbook> getPersons() {
         return cookbookRepository.findAll();
@@ -49,7 +43,7 @@ public class CookbookController {
         cookbookRepository.delete(id);
     }
 
-    @PutMapping("cookbook")
+    @PutMapping("cookbook/{id}")
     public Cookbook updateRecipe(@RequestBody Cookbook recipe) {
         return cookbookRepository.update(recipe);
     }
