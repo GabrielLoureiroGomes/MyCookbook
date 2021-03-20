@@ -4,7 +4,6 @@ import com.loureiro.cookbook.entity.Cookbook;
 import com.loureiro.cookbook.repository.CookbookRepository;
 import org.bson.types.ObjectId;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -26,16 +25,13 @@ public class CookbookController {
     }
 
     @GetMapping("cookbook")
-    public List<Cookbook> getPersons() {
+    public List<Cookbook> getAllRecipes() {
         return cookbookRepository.findAll();
     }
 
     @GetMapping("cookbook/{id}")
-    public ResponseEntity<Cookbook> getRecipe(@PathVariable ObjectId id) {
-        Cookbook recipe = cookbookRepository.findById(id);
-        if (recipe == null)
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        return ResponseEntity.ok(recipe);
+    public Cookbook getRecipe(@PathVariable ObjectId id) {
+        return cookbookRepository.findById(id);
     }
 
     @DeleteMapping("cookbook/{id}")

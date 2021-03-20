@@ -10,6 +10,7 @@ import org.bson.types.ObjectId;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Objects;
 
 @Getter
 @Setter
@@ -25,5 +26,10 @@ public class Cookbook {
     private LocalDate updatedAt;
 
     public Cookbook() {
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, title, ingredients, preparationSteps, createdAt, updatedAt);
     }
 }
