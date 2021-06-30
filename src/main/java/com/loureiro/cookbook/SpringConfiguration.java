@@ -16,8 +16,7 @@ import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
 @Configuration
 public class SpringConfiguration {
 
-    @Value("mongodb://localhost")
-    private String connectionString;
+    private final String connectionString = System.getenv().get("MONGO_HOST");
 
     @Bean
     public MongoClient mongoClient() {
