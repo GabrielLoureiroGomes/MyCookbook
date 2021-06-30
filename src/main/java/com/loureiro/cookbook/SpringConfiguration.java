@@ -16,7 +16,7 @@ import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
 @Configuration
 public class SpringConfiguration {
 
-    private final String connectionString = System.getenv().get("MONGO_HOST");
+    private final String connectionString = System.getenv().getOrDefault("MONGO_HOST", "mongodb+srv://gabzz:gj07092018$@gabzz.318le.mongodb.net");
 
     @Bean
     public MongoClient mongoClient() {
